@@ -1,6 +1,6 @@
 import os
 curr_path = os.path.abspath(os.path.dirname(__file__))
-asset_path = curr_path + "/WheeledTennisRobot/tennis_robot.usd"
+asset_path = curr_path + "asset/WheeledTennisRobot/tennis_robot.usd"
 
 
 

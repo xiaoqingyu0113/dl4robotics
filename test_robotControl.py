@@ -1,6 +1,6 @@
 import os
 curr_path = os.path.abspath(os.path.dirname(__file__))
-asset_path = curr_path + "/WheeledTennisRobot/tennis_robot.usd"
+asset_path = curr_path + "/asset/WheeledTennisRobot/tennis_robot.usd"
 
 
 
@@ -41,12 +41,15 @@ my_world.scene.add_default_ground_plane()
 
 add_reference_to_stage(usd_path=asset_path, prim_path="/World/Robot")
 tennis_robot = my_world.scene.add(Robot(prim_path="/World/Robot/tennis_robot", name="robot1"))
-tennis_robot.set_world_pose(position=np.array([0.0, 0.0, 1.0]) / get_stage_units())
+# tennis_robot.set_default_state(position=np.array([0.0, 0.0, 0.4]) / get_stage_units(),orientation=np.array([ 0.271, 0.653,   - 0.271,  0.653]))
+tennis_robot.set_default_state(position=np.array([0.0, 0.0, 0.4]) / get_stage_units())
+
+
 my_world.initialize_physics()
 my_world.reset()
 
-my_world.stop()
-my_world.play()
+# my_world.stop()
+# my_world.play()
 
 dc = _dynamic_control.acquire_dynamic_control_interface()
 art = dc.get_articulation("/World/Robot/tennis_robot")
@@ -61,8 +64,8 @@ while simulation_app.is_running():
     dc.set_dof_velocity_target(q9, set_q9(t))
     dc.set_dof_position_target(q2, set_q2(t))
     dc.set_dof_position_target(q4, set_q4(t))
+    if t<my_world.get_physics_dt()*15:
+        my_world.step(render=True)
 
-    my_world.step(render=True)
 my_world.stop()
-
 simulation_app.close()
