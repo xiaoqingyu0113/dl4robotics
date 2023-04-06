@@ -9,13 +9,14 @@ from utils.usd_utils import set_drive
 import carb
 from omni.isaac.core.utils.prims import get_prim_at_path
 from omni.isaac.core.articulations import ArticulationView
+from omni.isaac.wheeled_robots.robots import WheeledRobot
 
 from pxr import PhysxSchema
 import os
 
 
 
-class Tennisbot(Robot):
+class Tennisbot(WheeledRobot):
     def __init__(
         self,
         prim_path: str,
@@ -42,10 +43,10 @@ class Tennisbot(Robot):
         super().__init__(
             prim_path=prim_path+'/tennis_robot',
             name=name,
-            translation=self._position,
+            position=self._position,
             orientation=self._orientation,
-            articulation_controller=None,
-        )
+            wheel_dof_names=["Revolute_8", "Revolute_9"]
+            )
 
         dof_paths = [
             "Revolute_1",
@@ -60,9 +61,9 @@ class Tennisbot(Robot):
 
         drive_type = ["angular"] * 8
         default_dof_pos = [math.degrees(x) for x in [0.0, 0, 0.0, 0, 0.0, 0]] + [0.0, 0.0]
-        stiffness = [0] * 6 + [0] * 2
-        damping = [800*np.pi/180] * 6 + [1000] * 2
-        max_force = [87, 87, 87, 87, 87, 87, 200, 200]
+        stiffness = [100] * 6 + [0] * 2
+        damping = [100] * 6 + [100] * 2
+        max_force = [87, 87, 87, 87, 87, 87, 10, 10]
         # max_velocity = [math.degrees(x) for x in [2.175, 2.175, 2.175, 2.175, 2.61, 2.61]] + [100, 100]
 
         for i, dof in enumerate(dof_paths):

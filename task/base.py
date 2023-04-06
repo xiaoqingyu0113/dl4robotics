@@ -61,6 +61,7 @@ class TennisbotTask(BaseTask):
 
     def post_reset(self):
         self._dof_indices = [self._tennisbot.get_dof_index(n) for n in self._tennisbot.control_joints]
+        self._tennisbot.initialize(None)
         self.reset()
         
 

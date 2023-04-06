@@ -3,7 +3,8 @@ from omni.isaac.gym.vec_env import VecEnvBase
 env = VecEnvBase(headless=False)
 
 # create task and register task
-from task.base import TennisbotTask
+from task.chase_ball import TennisbotTask
+
 task = TennisbotTask(name="tennisbot")
 env.set_task(task, backend="torch")
 
