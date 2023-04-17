@@ -41,7 +41,7 @@ class Tennisbot(WheeledRobot):
         add_reference_to_stage(self._usd_path, prim_path)
         
         super().__init__(
-            prim_path=prim_path+'/tennis_robot',
+            prim_path=prim_path+'/tennis_robot/tennis_robot',
             name=name,
             position=self._position,
             orientation=self._orientation,

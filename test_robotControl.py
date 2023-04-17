@@ -51,20 +51,20 @@ my_world.reset()
 # my_world.stop()
 # my_world.play()
 
-dc = _dynamic_control.acquire_dynamic_control_interface()
-art = dc.get_articulation("/World/Robot/tennis_robot")
-q9 = dc.find_articulation_dof(art, "Revolute_9")
-q2 = dc.find_articulation_dof(art, "Revolute_2")
-q4 = dc.find_articulation_dof(art, "Revolute_4")
+# dc = _dynamic_control.acquire_dynamic_control_interface()
+# art = dc.get_articulation("/World/Robot/tennis_robot")
+# q9 = dc.find_articulation_dof(art, "Revolute_9")
+# q2 = dc.find_articulation_dof(art, "Revolute_2")
+# q4 = dc.find_articulation_dof(art, "Revolute_4")
 
 t= 0
 while simulation_app.is_running():
     t += my_world.get_physics_dt()
-    dc.wake_up_articulation(art)
-    dc.set_dof_velocity_target(q9, set_q9(t))
-    dc.set_dof_position_target(q2, set_q2(t))
-    dc.set_dof_position_target(q4, set_q4(t))
-    if t<my_world.get_physics_dt()*15:
+    # dc.wake_up_articulation(art)
+    # dc.set_dof_velocity_target(q9, set_q9(t))
+    # dc.set_dof_position_target(q2, set_q2(t))
+    # dc.set_dof_position_target(q4, set_q4(t))
+    if t<my_world.get_physics_dt()*10000:
         my_world.step(render=True)
 
 my_world.stop()

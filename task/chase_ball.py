@@ -66,6 +66,7 @@ class TennisbotTask(BaseTask):
         self.target_prev = torch.tensor([0,0,0])
         # trigger __init__ of parent class
         BaseTask.__init__(self, name=name, offset=offset)
+        
     def set_up_scene(self, scene) -> None:
 
         self.get_tennisbot()
