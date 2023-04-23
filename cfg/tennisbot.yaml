@@ -1,0 +1,48 @@
+usd_file: asset/WheeledTennisRobot/tennis_robot.usd
+
+
+prim_attach_path: /World/Robot
+
+prim_art_path: /World/Robot/tennis_robot/chair_base
+
+
+arm_dof_names:
+  - Revolute_1
+  - Revolute_2
+  - Revolute_3
+  - Revolute_4
+  - Revolute_5
+  - Revolute_6
+
+wheel_dof_names:
+  - Revolute_8
+  - Revolute_9
+
+max_joint_limits_deg:
+  - 180.0
+  - 0.0
+  - 115
+  - 270.0
+  - 180.0
+  - 60
+
+min_joint_limits_deg:
+  - -180.0
+  - -225.0
+  - -115
+  - 0.0
+  - -180.0
+  - -60
+
+max_wheel_linear_speed: 1.5
+max_wheel_angular_speed: 3.14
+
+distance_base2ground: 0.38189
+wheel_distance: 0.690
+wheel_diameter: 0.536935750346352 
+
+obs_prims:
+  - /World/Robot/tennis_robot/link1
+  - /World/Robot/tennis_robot/racquet/racquet
+
+reach_distance: 0.9
