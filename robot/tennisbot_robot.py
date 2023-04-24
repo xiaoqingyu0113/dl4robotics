@@ -15,6 +15,7 @@ import os
 from omni.isaac.core.objects import DynamicSphere
 from omni.isaac.core.materials import PhysicsMaterial
 from omni.isaac.core.prims import BaseSensor
+from omni.isaac.core.utils.rotations import quat_to_rot_matrix
 
 class Tennisbot(RobotView):
     def __init__(
@@ -76,7 +77,7 @@ class Tennisbot(RobotView):
             joint_indices.append(self.get_dof_index(dof_name))
         return self.get_joint_velocities(joint_indices=joint_indices,clone=True)[0]
     
-    def get_positions_and_velocities_from_sensors(self):
+    def get_poses_from_sensors(self):
         positions = np.array([])
         orientations = np.array([])
         for sensor in self.sensors:
@@ -93,14 +94,26 @@ class Tennisbot(RobotView):
 
         [sensor1_p, sensor2_p, sensor1_q, sensor2_q, arm_dof_positions, arm_dof_vels, wheel_dof_vels]
         '''
-        sensor_positions, sensor_orientations = self.get_positions_and_velocities_from_sensors()
+        sensor_positions, sensor_orientations = self.get_poses_from_sensors()
         joint_positions = self.get_positions_from_names(self.arm_dof_names) # N = 1,6
         joint_velocities =  self.get_velocities_from_names(self.arm_dof_names + self.wheel_dof_names) # 1,8
 
 
         return  sensor_positions, sensor_orientations, joint_positions, joint_velocities
     
+    def world2racket_position(self,ball_pos):
+        racket_pos, racket__orien_quat = self.sensors[1].get_world_pose()
+        racket_rot = quat_to_rot_matrix(racket__orien_quat)
+        ball_pos_in_racket_frame = racket_rot.T @ (ball_pos - racket_pos)
+        return ball_pos_in_racket_frame
+    
+    def check_collision(self,ball_pos):
+        ball_pos_in_racket_frame = self.world2racket_position(ball_pos)
+        x,y,z = ball_pos_in_racket_frame
+        return True if (x**2/0.190**2 + y**2/0.127**2 < 1) and np.abs(z) < 0.080 else False
+    
 
+    
 class Ball(DynamicSphere):
     def __init__(self, position=np.array([0,0,0]),is_gravity = True):
         ball_material = PhysicsMaterial("/World/ball_material", 
