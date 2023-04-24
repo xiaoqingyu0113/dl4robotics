@@ -8,6 +8,6 @@ if __name__ == '__main__':
     model = PPO.load("model/ppo/best_model")
 
     obs = env.reset()
-    for i in range(100000):
+    for i in range(2000):
         action, _states = model.predict(obs, deterministic=True)
         obs, reward, done, info = env.step(action)

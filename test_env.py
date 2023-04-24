@@ -11,11 +11,12 @@ if __name__ == '__main__':
     t = 0 # second in simulation, not real wall time
     obs = my_env.reset()
     while t < 60*5:
-        if t < 1:
-            actions = np.array([0,1,0,-1,0,0,0,0])
+        if t < 5:
+            actions = np.array([0,-1,0,1,0,0,0,0]) # initial pose
             obs, reward, done, info = my_env.step(actions)
         else:
-            actions = np.array([0,1,0,-1,0,0,0,0])
+            print('start control!!!!!!!!!!!!!!!!!!')
+            actions = np.array([0,-1,0,0.5,0.5,0.5,0,0])
             obs, reward, done, info = my_env.step(actions)
         step +=1
         t = my_env.get_dt() * step
