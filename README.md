@@ -1,8 +1,15 @@
 # dl4robotics
 Robot learning in Isaac sim with wheeled tennis robot
 
-### updates Mar 29, 2023
+### dependencies
 
-* build a env for RL training using Isaac Sim. To test, run
+1. Omniverse Isaac Sim
+2. stable-baseline3
+3. openai gym
 
-`PYTHON_PATH play.py`
+### updates Apr 24, 2023
+
+* build a env for RL training using Isaac Sim. To train, run `PYTHON_PATH train.py`
+
+* to validate, run
+`PYTHON_PATH validate.py`
