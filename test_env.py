@@ -9,18 +9,16 @@ if __name__ == '__main__':
 
     step = 0 
     t = 0 # second in simulation, not real wall time
-    obs = my_env.reset()
+    obs = my_env.reset(randomize=False)
     while t < 60*5:
-        if t < 5:
-            actions = np.array([0,-1,0,1,0,0,0,0]) # initial pose
+        if t < 5: # desired joint position for the first 5 sec
+            actions = np.array([0,-1,0,1,0,0,0,0]) 
             obs, reward, done, info = my_env.step(actions)
         else:
-            # print('start control!!!!!!!!!!!!!!!!!!')
-            # actions = np.array([0,-1,0,0.5,0.5,0.5,0,0])
+            # desired joint position after the first 5 second
+            actions = np.array([0,-1,0,0.5,0.5,0.5,0,0])
             obs, reward, done, info = my_env.step(actions)
-            # print(reward)
-        if done:
-            obs = my_env.reset()
+
         step +=1
         t = my_env.get_dt() * step
     my_env.close()

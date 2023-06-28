@@ -7,9 +7,25 @@ Robot learning in Isaac sim with wheeled tennis robot
 2. stable-baseline3
 3. openai gym
 
-### updates Apr 24, 2023
+### test agent with action inputs
+1. open and edit the file test_env.py
+2. change the inputs of actions to your desired.` Note: all the inputs are scaled to [-1,1]`.
+3. run the test
+   ```bash
+    PYTHONPATH  test_env.py
+    ```
 
-* build a env for RL training using Isaac Sim. To train, run `PYTHON_PATH train.py`
+###  training
 
-* to validate, run
-`PYTHON_PATH validate.py`
+1. run the test training
+   ```bash
+    PYTHONPATH  test_train.py
+    ```
+2. run the training with stable-baseline3
+   ```bash
+    PYTHONPATH  train.py
+    ```
+3. visualize the training result with stable-baseline3. `(need to edit and load the correct model in the validate.py)`
+   ```bash
+    PYTHONPATH  validate.py
+    ```

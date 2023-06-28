@@ -234,7 +234,7 @@ class TennisbotEnv(gym.Env):
 
             # robot elbows the ball
             if ball_move and not racket_hit_ball:
-                print('elbowed!')
+                # print('elbowed!')
                 reward = -5.0
                 done = True
 
@@ -300,10 +300,11 @@ class TennisbotEnv(gym.Env):
         self.initial_ball_position = np.array([x,y,z])
         self.ball.set_world_pose(position=self.initial_ball_position)
 
-    def reset(self):
+    def reset(self,randomize=True):
         self._my_world.reset()
-        self.tennisbot_randomize()
-        self.ball_randomize()
+        if randomize:
+            self.tennisbot_randomize()
+            self.ball_randomize()
 
 
 

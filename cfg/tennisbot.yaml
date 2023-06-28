@@ -1,4 +1,4 @@
-usd_file: asset/WheeledTennisRobot/tennis_robot.usd
+usd_file: asset/WheeledTennisRobot_06/tennis_robot_edit.usd
 
 
 prim_attach_path: /World/Robot
