@@ -107,10 +107,10 @@ class Tennisbot(RobotView):
         ball_pos_in_racket_frame = racket_rot.T @ (ball_pos - racket_pos)
         return ball_pos_in_racket_frame
     
-    def check_collision(self,ball_pos):
+    def check_racket_collision(self,ball_pos):
         ball_pos_in_racket_frame = self.world2racket_position(ball_pos)
         x,y,z = ball_pos_in_racket_frame
-        return True if (x**2/0.190**2 + y**2/0.127**2 < 1) and np.abs(z) < 0.080 else False
+        return True if (x**2/0.190**2 + y**2/0.127**2 < 1) and np.abs(z) < 0.090 else False
     
 
     
